@@ -1,14 +1,18 @@
 import json
 from confluent_kafka import Consumer, KafkaError
 import psycopg2
+from dotenv import load_dotenv
+import os
 
-# Cấu hình kết nối PostgreSQL của bạn
+load_dotenv()
+
+# Cấu hình kết nối PostgreSQL
 DB_CONFIG = {
-    "dbname": "ecommerce_db",
-    "user": "postgres",       # Thay đổi user của bạn nếu khác
-    "password": "#Qazqaz123", # Thay đổi mật khẩu của bạn
-    "host": "172.29.16.1",
-    "port": 5432
+    "dbname": os.getenv("DB_NAME", "ecommerce_db"),
+    "user": os.getenv("DB_USER", "postgres"),     # Thay đổi user
+    "password": os.getenv("DB_PASSWORD"), # Thay đổi mật khẩu
+    "host": os.getenv("DB_HOST", "172.29.16.1"),
+    "port": int(os.getenv("DB_PORT", 5432))
 }
 
 # Cấu hình Kafka Consumer
@@ -23,7 +27,7 @@ TOPIC_NAME = 'order_events'
 consumer.subscribe([TOPIC_NAME])
 
 def save_to_postgres(order_data):
-    """Hàm ghi dữ liệu đơn hàng vào PostgreSQL"""
+    
     try:
         conn = psycopg2.connect(**DB_CONFIG)
         cursor = conn.cursor()
