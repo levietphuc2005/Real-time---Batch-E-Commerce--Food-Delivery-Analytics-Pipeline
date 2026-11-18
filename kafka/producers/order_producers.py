@@ -13,7 +13,7 @@ conf = {
 producer = Producer(conf)
 TOPIC_NAME = 'order_events'
 
-#fake data
+
 FOOD_ITEMS = [
     {"item": "Bánh mì Sài Gòn", "price": 25000},
     {"item": "Bún bò Huế", "price": 45000},
@@ -62,10 +62,10 @@ if __name__ == "__main__":
                 callback=delivery_report
             )
             
-            # Giai phong bo nho dem
+            
             producer.poll(0)
             
-            # Giả lập thời gian giãn cách giữa các đơn hàng
+            
             time.sleep(random.uniform(1.0, 3.0))
 
     except KeyboardInterrupt:
