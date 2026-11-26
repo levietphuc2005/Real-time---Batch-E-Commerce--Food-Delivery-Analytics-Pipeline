@@ -1,6 +1,6 @@
 import json
-from confluent_kafka import Consumer, KafkaError
-import psycopg2
+from confluent_kafka import Consumer, KafkaError # type: ignore
+import psycopg2 # type: ignore
 from dotenv import load_dotenv
 import os
 

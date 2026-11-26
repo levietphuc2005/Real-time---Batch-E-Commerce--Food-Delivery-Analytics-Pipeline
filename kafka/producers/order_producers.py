@@ -62,7 +62,6 @@ if __name__ == "__main__":
                 callback=delivery_report
             )
             
-            
             producer.poll(0)
             
             
